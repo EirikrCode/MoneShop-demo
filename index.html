@@ -1,0 +1,2209 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MØNE — Tienda de Ropa</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --black:   #0A0A0A;
+      --white:   #FFFFFF;
+      --gray:    #6B6B6B;
+      --light:   #F5F5F5;
+      --border:  #E0E0E0;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--white);
+      color: var(--black);
+      overflow-x: hidden;
+    }
+
+    /* NAV */
+    nav {
+  position: fixed; top: 0; left: 0; right: 0;
+  z-index: 100;
+  background: rgba(255, 255, 255, 0.88);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  box-shadow: 0 1px 12px rgba(0, 0, 0, 0.04);
+  transform: translateZ(0);
+  will-change: transform;
+}
+
+    .nav-top {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      align-items: center;
+      padding: 1rem 3rem;
+    }
+
+    .nav-logo {
+  font-family: 'Inter', sans-serif;
+  font-size: 1.6rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  color: var(--black);
+  text-decoration: none;
+}
+
+    .nav-search {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      border: 1px solid var(--border);
+      border-radius: 50px;
+      padding: 0.5rem 1.2rem;
+      transition: border-color 0.2s;
+    }
+    .nav-search:focus-within { border-color: var(--black); }
+    .nav-search svg {
+      width: 16px; height: 16px;
+      stroke: var(--gray);
+      flex-shrink: 0;
+    }
+    .nav-search input {
+      border: none; outline: none;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 300;
+      color: var(--black);
+      background: transparent;
+      width: 100%;
+    }
+    .nav-search input::placeholder { color: var(--gray); }
+
+    .nav-actions {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 1.2rem;
+    }
+    .nav-action-btn {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.2rem;
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--black);
+      text-decoration: none;
+    }
+    .nav-action-btn svg {
+      width: 22px; height: 22px;
+      stroke: var(--black);
+      fill: none;
+      stroke-width: 1.5;
+    }
+    .nav-action-label {
+      font-size: 0.58rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--gray);
+    }
+
+
+    /* HERO */
+    .hero {
+  margin-top: 0;
+  min-height: 100vh;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.hero-bg {
+  position: absolute; inset: 0;
+  z-index: 0;
+}
+
+.hero-overlay {
+  position: absolute; inset: 0;
+  background: rgba(0,0,0,0.35);
+  z-index: 1;
+}
+
+.hero-video {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+}
+.hero-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  padding: 2rem;
+}
+
+.hero-tag {
+  font-size: 0.7rem;
+  font-weight: 400;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.7);
+  margin-bottom: 1.5rem;
+  opacity: 0;
+  animation: fadeUp 0.7s 0.2s ease forwards;
+}
+
+.hero-title {
+  font-size: clamp(3rem, 8vw, 7rem);
+  font-weight: 300;
+  letter-spacing: 0.05em;
+  color: var(--white);
+  line-height: 1;
+  margin-bottom: 2rem;
+  opacity: 0;
+  animation: fadeUp 0.7s 0.4s ease forwards;
+}
+
+.hero-title strong {
+  font-weight: 600;
+  display: block;
+}
+
+.hero-glass-btn {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--white);
+  text-decoration: none;
+  padding: 1rem 2.5rem;
+  background: rgba(255,255,255,0.15);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.3);
+  transition: background 0.3s, border-color 0.3s;
+  opacity: 0;
+  animation: fadeUp 0.7s 0.6s ease forwards;
+}
+.hero-glass-btn:hover {
+  background: rgba(255,255,255,0.25);
+  border-color: rgba(255,255,255,0.6);
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+/* CATEGORIAS */
+.section-cats {
+  display: grid;
+  grid-template-columns: 1.8fr 1fr;
+}
+
+.cat-bloque {
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.cat-bloque:nth-child(1) { height: 90vh; }
+.cat-bloque:nth-child(2) { height: 90vh; background: #f8f8f8; }
+
+
+.cat-bloque::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: rgba(0,0,0,0.58);
+  transition: background 0.4s ease, box-shadow 0.4s ease;
+}
+.cat-bloque:hover::after {
+  background: rgba(0,0,0,0.38);
+  box-shadow: inset 0 0 80px rgba(255,255,255,0.08);
+}
+
+.cat-bloque:nth-child(2)::after {
+  background: rgba(0,0,0,0.30);
+}
+.cat-bloque:nth-child(2):hover::after {
+  background: rgba(0,0,0,0.12);
+  box-shadow: inset 0 0 80px rgba(255,255,255,0.3);
+}
+
+.cat-info {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.cat-name {
+  font-size: 1.6rem;
+  font-weight: 300;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--white);
+  display: block;
+  margin-bottom: 0.8rem;
+  transition: letter-spacing 0.3s ease;
+}
+.cat-bloque:hover .cat-name { letter-spacing: 0.15em; }
+
+.cat-btn {
+  font-size: 0.65rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--white);
+  text-decoration: none;
+  background: rgba(255,255,255,0.15);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255,255,255,0.3);
+  padding: 0.6rem 1.4rem;
+  display: inline-block;
+  transition: background 0.3s, border-color 0.3s;
+}
+.cat-bloque:hover .cat-btn {
+  background: rgba(255,255,255,0.25);
+  border-color: rgba(255,255,255,0.6);
+}
+.nav-cats {
+  display: flex;
+  border-top: 1px solid var(--border);
+  overflow-x: auto;
+}
+.nav-cat {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--black);
+  text-decoration: none;
+  padding: 0.9rem 2rem;
+  border-right: 1px solid var(--border);
+  white-space: nowrap;
+  transition: background 0.2s, color 0.2s;
+  cursor: pointer;
+  background: none;
+  border-bottom: none;
+}
+.nav-cat:hover, .nav-cat.active {
+  background: var(--black);
+  color: var(--white);
+}
+.cat-video {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+}
+.cat-slides-wrap {
+  position: absolute; inset: 0;
+}
+.cat-slide {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f8f8f8;
+  opacity: 0;
+  transition: opacity 0.8s ease;
+}
+.cat-slide.active { opacity: 1; }
+.cat-slide img, .cat-slide video {
+  max-width: 85%;
+  max-height: 85%;
+  object-fit: contain;
+}
+.nav-action-btn:hover #bagIcon {
+  filter: invert(0%) brightness(0);
+  transform: scale(1.1);
+}
+#bagIcon {
+  transition: filter 0.2s ease, transform 0.2s ease;
+}
+.cat-bloque:nth-child(2) .cat-name { color: var(--black); }
+.cat-bloque:nth-child(2) .cat-btn {
+  color: var(--black);
+  background: rgba(0,0,0,0.06);
+  border-color: rgba(0,0,0,0.2);
+}
+/* SCROLL INDICATOR */
+.scroll-indicator {
+  position: absolute;
+  bottom: 2.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  opacity: 0;
+  animation: fadeUp 0.7s 1s ease forwards;
+}
+.scroll-indicator span {
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.6);
+}
+.scroll-arrow {
+  width: 1px;
+  height: 40px;
+  background: rgba(255,255,255,0.3);
+  position: relative;
+  overflow: hidden;
+}
+.scroll-arrow::after {
+  content: '';
+  position: absolute;
+  top: -100%;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255,255,255,0.9);
+  animation: scrollLine 1.5s ease infinite;
+}
+@keyframes scrollLine {
+  from { top: -100%; }
+  to   { top: 100%; }
+}
+nav.scrolled {
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow: 0 1px 20px rgba(0,0,0,0.08);
+}
+nav.scrolled .nav-logo {
+  font-size: 1.3rem;
+}
+nav, .nav-logo {
+  transition: all 0.3s ease;
+}
+/* FOOTER */
+footer {
+  background: var(--black);
+  padding: 4rem 3rem 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+}
+.footer-logo {
+  font-family: 'Inter', sans-serif;
+  font-size: 1.8rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  color: var(--white);
+  text-decoration: none;
+}
+.footer-links {
+  display: flex;
+  gap: 2.5rem;
+}
+.footer-link {
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.4);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.footer-link:hover { color: var(--white); }
+.footer-divider {
+  width: 40px;
+  height: 1px;
+  background: rgba(255,255,255,0.15);
+}
+.footer-copy {
+  font-size: 0.65rem;
+  letter-spacing: 0.08em;
+  color: rgba(255,255,255,0.25);
+}
+/* OCEAN COLLECTION */
+:root {
+  --ocean-sand: #F2E8D9;
+  --ocean-beige: #E8D5B5;
+  --ocean-blue: #7AB8C8;
+  --ocean-deep: #3A7A92;
+  --ocean-light: #C8E8F0;
+  --ocean-text: #2A4A55;
+}
+
+.section-ocean {
+  display: none;
+  min-height: 100vh;
+  background: var(--ocean-sand);
+}
+.section-ocean.visible { display: block; }
+
+/* OCEAN HERO */
+.ocean-hero {
+  position: relative;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.ocean-hero-video {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+}
+.ocean-hero-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to bottom, rgba(42,74,85,0.4), rgba(42,74,85,0.6));
+}
+.ocean-hero-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  color: var(--white);
+}
+.ocean-hero-tag {
+  font-size: 0.65rem;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--ocean-light);
+  margin-bottom: 1.5rem;
+  display: block;
+}
+.ocean-hero-title {
+  font-size: clamp(4rem, 10vw, 9rem);
+  font-weight: 200;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--white);
+  line-height: 0.9;
+}
+.ocean-hero-title em {
+  font-style: italic;
+  font-weight: 300;
+  color: var(--ocean-light);
+  display: block;
+  font-size: 0.5em;
+  letter-spacing: 0.3em;
+  margin-top: 1rem;
+}
+.ocean-hero-scroll {
+  position: absolute;
+  bottom: 2.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+.ocean-hero-scroll span {
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.6);
+}
+.ocean-scroll-line {
+  width: 1px; height: 40px;
+  background: rgba(255,255,255,0.3);
+  position: relative; overflow: hidden;
+}
+.ocean-scroll-line::after {
+  content: '';
+  position: absolute;
+  top: -100%; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(255,255,255,0.9);
+  animation: scrollLine 1.5s ease infinite;
+}
+
+/* OCEAN PRODUCTOS */
+.ocean-productos {
+  padding: 7rem 4rem;
+  position: relative;
+}
+.ocean-productos-video {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+.ocean-productos-header,
+.ocean-grid {
+  position: relative;
+  z-index: 1;
+}
+.ocean-productos-header {
+  text-align: center;
+  margin-bottom: 5rem;
+}
+.ocean-productos-label {
+  font-size: 0.65rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--ocean-deep);
+  margin-bottom: 1rem;
+  display: block;
+}
+.ocean-productos-title {
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  font-weight: 200;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ocean-text);
+}
+
+.ocean-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.producto-card {
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+.producto-card:hover {
+  transform: translateY(-6px);
+}
+.producto-card:hover .producto-img-wrap {
+  box-shadow: 0 20px 40px rgba(42, 74, 85, 0.2);
+}
+.producto-img-wrap {
+  transition: box-shadow 0.3s ease;
+}
+.producto-img-wrap {
+  position: relative;
+  background: rgba(242, 232, 217, 0.85);
+  overflow: hidden;
+  aspect-ratio: 3/4;
+  margin-bottom: 1.2rem;
+}
+.producto-img {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: contain;
+  padding: 1.5rem;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+.producto-img.back {
+  opacity: 0;
+}
+.producto-card.flipped .producto-img.front { opacity: 0; }
+.producto-card.flipped .producto-img.back  { opacity: 1; }
+
+.producto-flip-hint {
+  position: absolute;
+  bottom: 0.8rem; right: 0.8rem;
+  font-size: 0.55rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ocean-text);
+  background: rgba(242,232,217,0.85);
+  backdrop-filter: blur(6px);
+  padding: 0.3rem 0.6rem;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.producto-card:hover .producto-flip-hint { opacity: 1; }
+.producto-card.flipped .producto-flip-hint { opacity: 1; }
+
+.producto-info { padding: 0 0.2rem; }
+.producto-nombre {
+  font-size: 0.8rem;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ocean-text);
+  margin-bottom: 0.3rem;
+}
+.producto-precio {
+  font-size: 0.85rem;
+  font-weight: 300;
+  color: var(--ocean-deep);
+}
+.producto-tag {
+  display: inline-block;
+  font-size: 0.55rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  background: var(--ocean-light);
+  color: var(--ocean-deep);
+  padding: 0.2rem 0.5rem;
+  margin-top: 0.4rem;
+}
+
+/* BACK BTN */
+.ocean-back {
+  position: fixed;
+  top: 5rem; left: 2rem;
+  z-index: 200;
+  display: none;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--white);
+  cursor: pointer;
+  background: rgba(0,0,0,0.3);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255,255,255,0.2);
+  padding: 0.6rem 1rem;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+.ocean-back:hover { background: rgba(0,0,0,0.5); }
+.ocean-back.visible { display: flex; }
+/* MODAL PRODUCTO */
+.modal-overlay {
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,0.6);
+  backdrop-filter: blur(6px);
+  z-index: 300;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+.modal-overlay.visible {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.modal {
+  background: var(--ocean-sand);
+  width: 90%;
+  max-width: 860px;
+  max-height: 90vh;
+  overflow-y: auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  position: relative;
+  transform: translateY(20px);
+  transition: transform 0.3s ease;
+}
+.modal-overlay.visible .modal {
+  transform: translateY(0);
+}
+
+.modal-close {
+  position: absolute;
+  top: 1.2rem; right: 1.2rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.2rem;
+  color: var(--ocean-text);
+  z-index: 10;
+  width: 32px; height: 32px;
+  display: flex; align-items: center; justify-content: center;
+  transition: opacity 0.2s;
+}
+.modal-close:hover { opacity: 0.5; }
+
+/* IMAGEN MODAL */
+.modal-imgs {
+  background: var(--ocean-beige);
+  position: relative;
+  aspect-ratio: 3/4;
+}
+.modal-img {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: contain;
+  padding: 2rem;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+.modal-img.active { opacity: 1; }
+
+.modal-img-dots {
+  position: absolute;
+  bottom: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 0.5rem;
+  z-index: 2;
+}
+.modal-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: rgba(42,74,85,0.3);
+  cursor: pointer;
+  transition: background 0.2s;
+  border: none;
+}
+.modal-dot.active { background: var(--ocean-deep); }
+
+/* INFO MODAL */
+.modal-info {
+  padding: 3rem 2.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+.modal-tag {
+  font-size: 0.6rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--ocean-deep);
+}
+.modal-nombre {
+  font-size: 1.4rem;
+  font-weight: 300;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ocean-text);
+  line-height: 1.2;
+}
+.modal-precio {
+  font-size: 1.2rem;
+  font-weight: 300;
+  color: var(--ocean-deep);
+}
+.modal-desc {
+  font-size: 0.85rem;
+  font-weight: 300;
+  color: var(--ocean-text);
+  line-height: 1.7;
+  opacity: 0.8;
+}
+.modal-divider {
+  height: 1px;
+  background: rgba(42,74,85,0.15);
+}
+
+.modal-tallas-label {
+  font-size: 0.62rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ocean-text);
+  margin-bottom: 0.8rem;
+  display: block;
+}
+.modal-tallas {
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+.modal-talla {
+  width: 42px; height: 42px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  border: 1px solid rgba(42,74,85,0.25);
+  cursor: pointer;
+  background: none;
+  color: var(--ocean-text);
+  transition: all 0.2s;
+}
+.modal-talla:hover, .modal-talla.active {
+  background: var(--ocean-deep);
+  color: var(--white);
+  border-color: var(--ocean-deep);
+}
+
+.modal-add-btn {
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  background: var(--ocean-text);
+  color: var(--white);
+  border: none;
+  padding: 1.1rem;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s;
+  margin-top: auto;
+}
+.modal-add-btn:hover { background: var(--ocean-deep); }
+.modal-add-btn:active { transform: scale(0.98); }
+
+/* BADGE BOLSA */
+.bag-badge {
+  position: absolute;
+  top: -4px; right: -6px;
+  width: 16px; height: 16px;
+  background: var(--basics-carbon);
+  border-radius: 50%;
+  font-size: 0.55rem;
+  font-weight: 600;
+  color: var(--white);
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
+.bag-badge.visible { display: flex; }
+.nav-action-btn { position: relative; }
+
+/* BASICS COLLECTION */
+:root {
+  --basics-black: #0A0A0A;
+  --basics-carbon: #1C1C1C;
+  --basics-gray: #3A3A3A;
+  --basics-mid: #6B6B6B;
+  --basics-light: #F0F0F0;
+  --basics-white: #FAFAFA;
+}
+
+.section-basics {
+  display: none;
+  min-height: 100vh;
+  background: var(--basics-white);
+}
+.section-basics.visible { display: block; }
+
+.basics-hero {
+  position: relative;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.basics-hero-video {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+}
+.basics-hero-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to bottom, rgba(10,10,10,0.5), rgba(10,10,10,0.7));
+}
+.basics-hero-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  color: var(--white);
+}
+.basics-hero-tag {
+  font-size: 0.65rem;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.5);
+  margin-bottom: 1.5rem;
+  display: block;
+}
+.basics-hero-title {
+  font-size: clamp(4rem, 10vw, 9rem);
+  font-weight: 200;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--white);
+  line-height: 0.9;
+}
+.basics-hero-title em {
+  font-style: italic;
+  font-weight: 300;
+  color: rgba(255,255,255,0.5);
+  display: block;
+  font-size: 0.5em;
+  letter-spacing: 0.3em;
+  margin-top: 1rem;
+}
+.basics-hero-scroll {
+  position: absolute;
+  bottom: 2.5rem; left: 50%;
+  transform: translateX(-50%);
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+.basics-hero-scroll span {
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.4);
+}
+.basics-scroll-line {
+  width: 1px; height: 40px;
+  background: rgba(255,255,255,0.2);
+  position: relative; overflow: hidden;
+}
+.basics-scroll-line::after {
+  content: '';
+  position: absolute;
+  top: -100%; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(255,255,255,0.8);
+  animation: scrollLine 1.5s ease infinite;
+}
+
+/* BASICS PRODUCTOS */
+.basics-productos {
+  padding: 7rem 4rem;
+  background: var(--basics-white);
+  position: relative;
+}
+.basics-productos-video {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  z-index: 0;
+  opacity: 0.08;
+}
+.basics-productos-header,
+.basics-grid {
+  position: relative;
+  z-index: 1;
+}
+.basics-productos-header {
+  text-align: center;
+  margin-bottom: 5rem;
+}
+.basics-productos-label {
+  font-size: 0.65rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--basics-mid);
+  margin-bottom: 1rem;
+  display: block;
+}
+.basics-productos-title {
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  font-weight: 200;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--basics-black);
+}
+
+.basics-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.basics-card {
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+.basics-card:hover { transform: translateY(-6px); }
+
+.basics-img-wrap {
+  position: relative;
+  background: var(--basics-light);
+  overflow: hidden;
+  aspect-ratio: 3/4;
+  margin-bottom: 1.2rem;
+  transition: box-shadow 0.3s ease;
+}
+.basics-card:hover .basics-img-wrap {
+  box-shadow: 0 20px 40px rgba(0,0,0,0.12);
+}
+.basics-img {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: contain;
+  padding: 1.5rem;
+}
+.basics-flip-hint {
+  position: absolute;
+  bottom: 0.8rem; right: 0.8rem;
+  font-size: 0.55rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--basics-carbon);
+  background: rgba(240,240,240,0.85);
+  backdrop-filter: blur(6px);
+  padding: 0.3rem 0.6rem;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.basics-card:hover .basics-flip-hint { opacity: 1; }
+
+.basics-info { padding: 0 0.2rem; }
+.basics-nombre {
+  font-size: 0.8rem;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--basics-carbon);
+  margin-bottom: 0.3rem;
+}
+.basics-precio {
+  font-size: 0.85rem;
+  font-weight: 300;
+  color: var(--basics-mid);
+}
+.basics-tag {
+  display: inline-block;
+  font-size: 0.55rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  background: var(--basics-light);
+  color: var(--basics-gray);
+  padding: 0.2rem 0.5rem;
+  margin-top: 0.4rem;
+  border: 1px solid rgba(0,0,0,0.08);
+}
+
+/* BACK BTN BASICS */
+.basics-back {
+  position: fixed;
+  top: 5rem; left: 2rem;
+  z-index: 200;
+  display: none;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--white);
+  cursor: pointer;
+  background: rgba(10,10,10,0.5);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255,255,255,0.15);
+  padding: 0.6rem 1rem;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+.basics-back:hover { background: rgba(10,10,10,0.8); }
+.basics-back.visible { display: flex; }
+
+/* SEARCH RESULTS */
+.search-dropdown {
+  position: absolute;
+  top: calc(100% + 0.5rem);
+  left: 50%;
+  transform: translateX(-50%);
+  width: 420px;
+  background: rgba(255,255,255,0.92);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(0,0,0,0.08);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+  z-index: 200;
+  display: none;
+  flex-direction: column;
+  max-height: 400px;
+  overflow-y: auto;
+}
+.search-dropdown.visible { display: flex; }
+
+.search-result {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.8rem 1.2rem;
+  cursor: pointer;
+  transition: background 0.2s;
+  border-bottom: 1px solid rgba(0,0,0,0.05);
+}
+.search-result:last-child { border-bottom: none; }
+.search-result:hover { background: rgba(0,0,0,0.04); }
+
+.search-result-img {
+  width: 48px; height: 48px;
+  object-fit: contain;
+  background: var(--light);
+  flex-shrink: 0;
+  padding: 4px;
+}
+.search-result-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+.search-result-nombre {
+  font-size: 0.8rem;
+  font-weight: 400;
+  letter-spacing: 0.05em;
+  color: var(--black);
+}
+.search-result-col {
+  font-size: 0.62rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gray);
+}
+.search-empty {
+  padding: 1.2rem;
+  font-size: 0.8rem;
+  color: var(--gray);
+  text-align: center;
+  letter-spacing: 0.05em;
+}
+
+.nav-search { position: relative; }
+
+/* BOLSA DRAWER */
+.bolsa-overlay {
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,0.4);
+  backdrop-filter: blur(4px);
+  z-index: 400;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+.bolsa-overlay.visible {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.bolsa-drawer {
+  position: fixed;
+  top: 0; right: -100%;
+  width: 420px;
+  max-width: 95vw;
+  height: 100vh;
+  background: rgba(250,250,250,0.96);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border-left: 1px solid rgba(0,0,0,0.08);
+  z-index: 500;
+  display: flex;
+  flex-direction: column;
+  transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.bolsa-drawer.visible { right: 0; }
+
+.bolsa-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 2rem 1.8rem 1.5rem;
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+}
+.bolsa-title {
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--black);
+}
+.bolsa-count {
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  color: var(--gray);
+}
+.bolsa-close {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  color: var(--gray);
+  transition: color 0.2s;
+  width: 32px; height: 32px;
+  display: flex; align-items: center; justify-content: center;
+}
+.bolsa-close:hover { color: var(--black); }
+
+.bolsa-items {
+  flex: 1;
+  overflow-y: auto;
+  padding: 1rem 1.8rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.bolsa-empty {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8rem;
+  color: var(--gray);
+}
+.bolsa-empty-icon {
+  width: 48px; height: 48px;
+  opacity: 0.3;
+  object-fit: contain;
+}
+.bolsa-empty-text {
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.bolsa-item {
+  display: grid;
+  grid-template-columns: 72px 1fr auto;
+  gap: 1rem;
+  align-items: center;
+  padding: 1rem;
+  background: rgba(255,255,255,0.8);
+  border: 1px solid rgba(0,0,0,0.06);
+  transition: background 0.2s;
+}
+.bolsa-item:hover { background: rgba(255,255,255,1); }
+
+.bolsa-item-img {
+  width: 72px; height: 72px;
+  object-fit: contain;
+  background: var(--light);
+  padding: 4px;
+}
+.bolsa-item-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+.bolsa-item-nombre {
+  font-size: 0.75rem;
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  color: var(--black);
+}
+.bolsa-item-talla {
+  font-size: 0.62rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--gray);
+}
+.bolsa-item-precio {
+  font-size: 0.8rem;
+  font-weight: 300;
+  color: var(--black);
+}
+.bolsa-item-del {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--gray);
+  font-size: 0.9rem;
+  transition: color 0.2s;
+  padding: 0.3rem;
+}
+.bolsa-item-del:hover { color: #c0392b; }
+
+.bolsa-footer {
+  padding: 1.5rem 1.8rem 2rem;
+  border-top: 1px solid rgba(0,0,0,0.06);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.bolsa-total {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.bolsa-total-label {
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--gray);
+}
+.bolsa-total-precio {
+  font-size: 1rem;
+  font-weight: 300;
+  color: var(--black);
+}
+.bolsa-checkout {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--white);
+  background: rgba(28,28,28,0.92);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.1);
+  padding: 1.1rem;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s;
+  width: 100%;
+}
+.bolsa-checkout:hover { background: rgba(28,28,28,1); }
+.bolsa-checkout:active { transform: scale(0.98); }
+.bolsa-checkout:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+video {
+  will-change: transform;
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+}
+/* LIMPIEZA — quitar nav-cats duplicado que ya no se usa */
+.nav-cats, .nav-cat { display: none; }
+
+/* MOBILE */
+@media (max-width: 768px) {
+
+  /* NAV */
+  .nav-top {
+    grid-template-columns: 1fr auto auto;
+    padding: 0.8rem 1.2rem;
+    gap: 0.8rem;
+  }
+  .nav-search {
+    display: none;
+  }
+  .nav-search.mobile-visible {
+    display: flex;
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    border-radius: 0;
+    border: none;
+    border-bottom: 1px solid var(--border);
+    padding: 1rem 1.2rem;
+    background: rgba(255,255,255,0.96);
+    z-index: 150;
+  }
+  .nav-logo { font-size: 1.2rem; }
+  .nav-action-label { display: none; }
+
+  /* HERO */
+  .hero-title { font-size: clamp(2.5rem, 12vw, 4rem); }
+  .hero-tag { font-size: 0.62rem; }
+
+  /* CATEGORIAS */
+  .section-cats {
+    grid-template-columns: 1fr;
+  }
+  .cat-bloque:nth-child(1) { height: 60vh; }
+  .cat-bloque:nth-child(2) { height: 60vh; }
+
+  /* OCEAN & BASICS PRODUCTOS */
+  .ocean-grid, .basics-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+  .ocean-productos, .basics-productos {
+    padding: 4rem 1.2rem;
+  }
+  .ocean-productos-title, .basics-productos-title {
+    font-size: 2rem;
+  }
+
+  /* MODAL */
+  .modal {
+    grid-template-columns: 1fr;
+    grid-template-rows: 50vh auto;
+    width: 95%;
+    max-height: 92vh;
+  }
+  .modal-imgs { aspect-ratio: unset; height: 50vh; }
+  .modal-info { padding: 1.5rem; }
+  .modal-nombre { font-size: 1.1rem; }
+
+  /* BOLSA */
+  .bolsa-drawer { width: 100%; }
+
+  /* BACK BTNS */
+  .ocean-back, .basics-back {
+    top: 4.5rem;
+    left: 1rem;
+    padding: 0.5rem 0.8rem;
+    font-size: 0.6rem;
+  }
+
+  /* HERO OCEAN & BASICS */
+  .ocean-hero-title, .basics-hero-title {
+    font-size: clamp(3rem, 14vw, 6rem);
+  }
+
+  /* FOOTER */
+  footer { padding: 3rem 1.5rem 1.5rem; }
+  .footer-links { gap: 1.5rem; flex-wrap: wrap; justify-content: center; }
+}
+
+@media (max-width: 480px) {
+  .ocean-grid, .basics-grid {
+    grid-template-columns: 1fr;
+    max-width: 320px;
+    margin: 0 auto;
+  }
+}
+  </style>
+  
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav id="navbar">
+    <div class="nav-top">
+      <a href="#" class="nav-logo">MØNE</a>
+
+      <div class="nav-search">
+        <img src="icons/magnifying-glass.png" style="width:16px; height:16px; object-fit:contain;">
+        <input type="text" id="searchInput" placeholder="Buscar productos..." autocomplete="off">
+      </div>
+
+      <div class="nav-actions">
+        <a href="#" class="nav-action-btn" onclick="toggleMobileSearch(); return false;" id="searchBtn" style="display:none;">
+          <img src="icons/magnifying-glass.png" style="width:20px; height:20px; object-fit:contain;">
+        </a>
+        <a href="#" class="nav-action-btn" onclick="openBolsa(); return false;">
+          <img src="icons/bag.png" id="bagIcon" style="width:22px; height:22px; object-fit:contain; transition: filter 0.2s;">
+          <span class="bag-badge" id="bagBadge">0</span>
+          <span class="nav-action-label">Bolsa</span>
+        </a>
+      </div>
+    </div>
+
+  </nav>
+
+ <!-- HERO -->
+<section class="hero" id="inicio">
+    <div class="hero-bg">
+        <video class="hero-video" autoplay muted loop playsinline>
+          <source src="imgs/fondo-ocean1.mp4" type="video/mp4">
+        </video>
+      </div>
+    <div class="hero-overlay"></div>
+  
+    <div class="hero-content">
+      <p class="hero-tag">Temporada 2026</p>
+      <h1 class="hero-title">
+        Nueva
+        <strong>Colección</strong>
+      </h1>
+      <a href="#" class="hero-glass-btn" onclick="showOcean(); return false;">Explorar ahora</a>
+    </div>
+
+    <div class="scroll-indicator">
+      <span>Scroll</span>
+      <div class="scroll-arrow"></div>
+    </div>
+
+  </section>
+
+  <!-- CATEGORIAS -->
+<section class="section-cats">
+
+    <div class="cat-bloque">
+        <video class="cat-video" autoplay muted loop playsinline>
+          <source src="imgs/fondo-ocean2.mp4" type="video/mp4">
+        </video>
+        <div class="cat-info">
+          <span class="cat-name">Nueva Colección</span>
+          <a href="#" class="hero-glass-btn" onclick="showOcean(); return false;">Explorar ahora</a>
+        </div>
+      </div>
+  
+      <div class="cat-bloque">
+        <div class="cat-slides-wrap" id="camisasSlider">
+          <div class="cat-slide active">
+            <video autoplay muted loop playsinline style="max-width:85%; max-height:85%; object-fit:contain;">
+              <source src="imgs/wall-basic.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="cat-slide"><img src="imgs/basic1.png" alt="1"></div>
+          <div class="cat-slide"><img src="imgs/basic2.png" alt="2"></div>
+          <div class="cat-slide"><img src="imgs/basic3.png" alt="3"></div>
+          <div class="cat-slide"><img src="imgs/basic4.png" alt="4"></div>
+          <div class="cat-slide"><img src="imgs/basic5.png" alt="5"></div>
+          <div class="cat-slide"><img src="imgs/basic6.png" alt="6"></div>
+          <div class="cat-slide"><img src="imgs/basic7.png" alt="7"></div>
+          <div class="cat-slide"><img src="imgs/basic8.png" alt="8"></div>
+        </div>
+        <div class="cat-info">
+          <span class="cat-name">Basics</span>
+          <a href="#" class="cat-btn" onclick="showBasics(); return false;">Explorar</a>
+        </div>
+      </div>
+  
+  </section>
+
+  <!-- BACK BTN -->
+<a href="#" class="ocean-back" id="oceanBack" onclick="showHome(); return false;">← Volver</a>
+
+<!-- OCEAN COLLECTION -->
+<section class="section-ocean" id="sectionOcean">
+
+  <div class="ocean-hero">
+    <video class="ocean-hero-video" autoplay muted loop playsinline>
+      <source src="imgs/fondo-ocean2.mp4" type="video/mp4">
+    </video>
+    <div class="ocean-hero-overlay"></div>
+    <div class="ocean-hero-content">
+      <span class="ocean-hero-tag">MØNE — 2026</span>
+      <h1 class="ocean-hero-title">
+        OCEAN
+        <em>Collection</em>
+      </h1>
+    </div>
+    <div class="ocean-hero-scroll">
+      <span>Scroll</span>
+      <div class="ocean-scroll-line"></div>
+    </div>
+  </div>
+
+  <div class="ocean-productos">
+    <video class="ocean-productos-video" autoplay muted loop playsinline>
+      <source src="imgs/arena.mp4" type="video/mp4">
+    </video>
+    <div class="ocean-productos-header">
+      <span class="ocean-productos-label">Nueva Colección 2026</span>
+      <h2 class="ocean-productos-title">Ocean</h2>
+    </div>
+
+    <div class="ocean-grid">
+
+      <div class="producto-card" onclick="openModal(0)"> 
+        <div class="producto-img-wrap">
+          <img class="producto-img front" src="imgs/BASIC OCEAN SHIRT 1 BOS1.png" alt="Basic Ocean Shirt 1">
+          <img class="producto-img back" src="imgs/BASIC OCEAN SHIRT 1 BOS1 BACK.png" alt="Basic Ocean Shirt 1 Back">
+          <span class="producto-flip-hint">Ver espalda</span>
+        </div>
+        <div class="producto-info">
+          <p class="producto-nombre">Basic Ocean Shirt 1</p>
+          <p class="producto-precio">$XXX</p>
+          <span class="producto-tag">Ocean Collection</span>
+        </div>
+      </div>
+
+      <div class="producto-card" onclick="openModal(1)">
+        <div class="producto-img-wrap">
+          <img class="producto-img front" src="imgs/BASIC OCEAN SHIRT 2 BOS2.png" alt="Basic Ocean Shirt 2">
+          <img class="producto-img back" src="imgs/BASIC OCEAN SHIRT 2 BOS2 BACK.png" alt="Basic Ocean Shirt 2 Back">
+          <span class="producto-flip-hint">Ver espalda</span>
+        </div>
+        <div class="producto-info">
+          <p class="producto-nombre">Basic Ocean Shirt 2</p>
+          <p class="producto-precio">$XXX</p>
+          <span class="producto-tag">Ocean Collection</span>
+        </div>
+      </div>
+
+      <div class="producto-card" onclick="openModal(2)"> 
+        <div class="producto-img-wrap">
+          <img class="producto-img front" src="imgs/OCEAN SHIRT 1 OC1.png" alt="Ocean Shirt 1">
+          <img class="producto-img back" src="imgs/OCEAN SHIRT 1 BACK OC1.png" alt="Ocean Shirt 1 Back">
+          <span class="producto-flip-hint">Ver espalda</span>
+        </div>
+        <div class="producto-info">
+          <p class="producto-nombre">Ocean Shirt 1</p>
+          <p class="producto-precio">$XXX</p>
+          <span class="producto-tag">Ocean Collection</span>
+        </div>
+      </div>
+
+      <div class="producto-card" onclick="openModal(3)"> 
+        <div class="producto-img-wrap">
+          <img class="producto-img front" src="imgs/OCEAN SHORT 1 OCS1.png" alt="Ocean Short 1">
+          <span class="producto-flip-hint">Una pieza</span>
+        </div>
+        <div class="producto-info">
+          <p class="producto-nombre">Ocean Short 1</p>
+          <p class="producto-precio">$XXX</p>
+          <span class="producto-tag">Ocean Collection</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</section>
+
+<!-- BACK BTN BASICS -->
+<a href="#" class="basics-back" id="basicsBack" onclick="showHome(); return false;">← Volver</a>
+
+<!-- BASICS COLLECTION -->
+<section class="section-basics" id="sectionBasics">
+
+  <div class="basics-hero">
+    <video class="basics-hero-video" autoplay muted loop playsinline>
+      <source src="imgs/wall-basic.mp4" type="video/mp4">
+    </video>
+    <div class="basics-hero-overlay"></div>
+    <div class="basics-hero-content">
+      <span class="basics-hero-tag">MØNE — 2026</span>
+      <h1 class="basics-hero-title">
+        BASICS
+        <em>Collection</em>
+      </h1>
+    </div>
+    <div class="basics-hero-scroll">
+      <span>Scroll</span>
+      <div class="basics-scroll-line"></div>
+    </div>
+  </div>
+
+  <div class="basics-productos">
+    <video class="basics-productos-video" autoplay muted loop playsinline>
+      <source src="imgs/wall-basic.mp4" type="video/mp4">
+    </video>
+    <div class="basics-productos-header">
+      <span class="basics-productos-label">Colección Permanente</span>
+      <h2 class="basics-productos-title">Basics</h2>
+    </div>
+
+    <div class="basics-grid">
+
+      <div class="basics-card" onclick="openBasicsModal(0)">
+        <div class="basics-img-wrap">
+          <img class="basics-img" src="imgs/Basic MONE Shirt 1 BMS1.png" alt="Basic MØNE Shirt 1">
+          <span class="basics-flip-hint">Ver espalda</span>
+        </div>
+        <div class="basics-info">
+          <p class="basics-nombre">Basic MØNE Shirt 1</p>
+          <p class="basics-precio">$XXX</p>
+          <span class="basics-tag">Basics Collection</span>
+        </div>
+      </div>
+
+      <div class="basics-card" onclick="openBasicsModal(1)">
+        <div class="basics-img-wrap">
+          <img class="basics-img" src="imgs/Basic MONE Shirt 2 BMS2.png" alt="Basic MØNE Shirt 2">
+          <span class="basics-flip-hint">Ver espalda</span>
+        </div>
+        <div class="basics-info">
+          <p class="basics-nombre">Basic MØNE Shirt 2</p>
+          <p class="basics-precio">$XXX</p>
+          <span class="basics-tag">Basics Collection</span>
+        </div>
+      </div>
+
+      <div class="basics-card" onclick="openBasicsModal(2)">
+        <div class="basics-img-wrap">
+          <img class="basics-img" src="imgs/Basic MONE Shirt 3 BMS3.png" alt="Basic MØNE Shirt 3">
+          <span class="basics-flip-hint">Ver espalda</span>
+        </div>
+        <div class="basics-info">
+          <p class="basics-nombre">Basic MØNE Shirt 3</p>
+          <p class="basics-precio">$XXX</p>
+          <span class="basics-tag">Basics Collection</span>
+        </div>
+      </div>
+
+      <div class="basics-card" onclick="openBasicsModal(3)">
+        <div class="basics-img-wrap">
+          <img class="basics-img" src="imgs/Basic MONE Shirt 4 BMS4.png" alt="Basic MØNE Shirt 4">
+          <span class="basics-flip-hint">Una pieza</span>
+        </div>
+        <div class="basics-info">
+          <p class="basics-nombre">Basic MØNE Shirt 4</p>
+          <p class="basics-precio">$XXX</p>
+          <span class="basics-tag">Basics Collection</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</section>
+
+  <script>
+
+// SLIDER BASICS
+const slides = document.querySelectorAll('.cat-slide');
+let catCurrent = 0;
+setInterval(() => {
+  slides[catCurrent].classList.remove('active');
+  catCurrent = (catCurrent + 1) % slides.length;
+  slides[catCurrent].classList.add('active');
+}, 3000);
+
+// BOLSA
+const bagBtn = document.querySelector('.nav-action-btn');
+const bagIcon = document.getElementById('bagIcon');
+const bagBadge = document.getElementById('bagBadge');
+let bagCount = 0;
+let bolsaItems = [];
+
+bagBtn.addEventListener('mouseenter', () => {
+  bagIcon.style.filter = 'brightness(0)';
+  bagIcon.style.transform = 'scale(1.15)';
+});
+bagBtn.addEventListener('mouseleave', () => {
+  bagIcon.style.filter = 'none';
+  bagIcon.style.transform = 'scale(1)';
+});
+
+function openBolsa() {
+  document.getElementById('bolsaDrawer').classList.add('visible');
+  document.getElementById('bolsaOverlay').classList.add('visible');
+  renderBolsa();
+}
+function closeBolsa() {
+  document.getElementById('bolsaDrawer').classList.remove('visible');
+  document.getElementById('bolsaOverlay').classList.remove('visible');
+}
+
+function renderBolsa() {
+  const container = document.getElementById('bolsaItems');
+  const countEl = document.getElementById('bolsaCount');
+  const totalEl = document.getElementById('bolsaTotal');
+  const checkoutBtn = document.getElementById('bolsaCheckout');
+
+  countEl.textContent = bolsaItems.length + (bolsaItems.length === 1 ? ' producto' : ' productos');
+  checkoutBtn.disabled = bolsaItems.length === 0;
+
+  if (bolsaItems.length === 0) {
+    container.innerHTML = `
+      <div class="bolsa-empty">
+        <img class="bolsa-empty-icon" src="icons/bag.png" alt="bolsa">
+        <p class="bolsa-empty-text">Tu bolsa está vacía</p>
+      </div>`;
+    totalEl.textContent = '$0';
+    return;
+  }
+
+  container.innerHTML = '';
+  bolsaItems.forEach((item, i) => {
+    const el = document.createElement('div');
+    el.className = 'bolsa-item';
+    el.innerHTML = `
+      <img class="bolsa-item-img" src="${item.img}" alt="${item.nombre}">
+      <div class="bolsa-item-info">
+        <p class="bolsa-item-nombre">${item.nombre}</p>
+        <p class="bolsa-item-talla">Talla: ${item.talla || '—'}</p>
+        <p class="bolsa-item-precio">${item.precio}</p>
+      </div>
+      <button class="bolsa-item-del" onclick="eliminarItem(${i})">✕</button>
+    `;
+    container.appendChild(el);
+  });
+
+  totalEl.textContent = bolsaItems.length + ' pieza' + (bolsaItems.length !== 1 ? 's' : '');
+}
+
+function eliminarItem(index) {
+  bolsaItems.splice(index, 1);
+  bagCount = bolsaItems.length;
+  bagBadge.textContent = bagCount;
+  if (bagCount === 0) bagBadge.classList.remove('visible');
+  renderBolsa();
+}
+
+function finalizarCompra() {
+  alert('¡Gracias por tu compra!');
+  bolsaItems = [];
+  bagCount = 0;
+  bagBadge.textContent = 0;
+  bagBadge.classList.remove('visible');
+  closeBolsa();
+  renderBolsa();
+}
+
+function agregarBolsa() {
+  const nombre = document.getElementById('modalNombre').textContent;
+  const precio = document.getElementById('modalPrecio').textContent;
+  const talla = document.querySelector('.modal-talla.active')?.textContent || '—';
+  const img = document.querySelector('.modal-img.active')?.src || '';
+
+  bolsaItems.push({ nombre, precio, talla, img });
+  bagCount = bolsaItems.length;
+  bagBadge.textContent = bagCount;
+  bagBadge.classList.add('visible');
+
+  const btn = document.querySelector('.modal-add-btn');
+  btn.textContent = '✓ Agregado';
+  btn.style.background = 'var(--ocean-blue)';
+  setTimeout(() => {
+    btn.textContent = 'Agregar a la bolsa';
+    btn.style.background = '';
+    closeModal();
+  }, 1000);
+}
+
+// NAV SCROLL
+window.addEventListener('scroll', () => {
+  const nav = document.getElementById('navbar');
+  if (window.scrollY > 80) nav.classList.add('scrolled');
+  else nav.classList.remove('scrolled');
+});
+
+// VISTAS
+function showOcean() {
+  document.getElementById('inicio').style.display = 'none';
+  document.querySelector('.section-cats').style.display = 'none';
+  document.querySelector('footer').style.display = 'none';
+  document.getElementById('sectionOcean').classList.add('visible');
+  document.getElementById('oceanBack').classList.add('visible');
+  window.scrollTo(0, 0);
+}
+function showHome() {
+  document.getElementById('inicio').style.display = '';
+  document.querySelector('.section-cats').style.display = '';
+  document.querySelector('footer').style.display = '';
+  document.getElementById('sectionOcean').classList.remove('visible');
+  document.getElementById('oceanBack').classList.remove('visible');
+  document.getElementById('sectionBasics').classList.remove('visible');
+  document.getElementById('basicsBack').classList.remove('visible');
+  window.scrollTo(0, 0);
+}
+
+// PRODUCTOS
+const productos = [
+  {
+    nombre: 'Basic Ocean Shirt 1',
+    precio: '$XXX',
+    desc: 'Camisa de lino ligero con corte relajado. Perfecta para días de playa o tarde de verano.',
+    tallas: ['XS','S','M','L','XL'],
+    imgs: ['imgs/BASIC OCEAN SHIRT 1 BOS1.png', 'imgs/BASIC OCEAN SHIRT 1 BOS1 BACK.png']
+  },
+  {
+    nombre: 'Basic Ocean Shirt 2',
+    precio: '$XXX',
+    desc: 'Camisa fresca de algodón con detalles minimalistas. Diseñada para la colección Ocean.',
+    tallas: ['XS','S','M','L','XL'],
+    imgs: ['imgs/BASIC OCEAN SHIRT 2 BOS2.png', 'imgs/BASIC OCEAN SHIRT 2 BOS2 BACK.png']
+  },
+  {
+    nombre: 'Ocean Shirt 1',
+    precio: '$XXX',
+    desc: 'Pieza icónica de la colección. Tejido premium con tonos que evocan el mar de Cancún.',
+    tallas: ['XS','S','M','L','XL'],
+    imgs: ['imgs/OCEAN SHIRT 1 OC1.png', 'imgs/OCEAN SHIRT 1 BACK OC1.png']
+  },
+  {
+    nombre: 'Ocean Short 1',
+    precio: '$XXX',
+    desc: 'Short ligero con caída perfecta. Combinable con cualquier pieza de la colección Ocean.',
+    tallas: ['XS','S','M','L','XL'],
+    imgs: ['imgs/OCEAN SHORT 1 OCS1.png']
+  }
+];
+
+let modalImgCurrent = 0;
+let modalImgs = [];
+
+function openModal(index) {
+  const p = productos[index];
+  document.getElementById('modalNombre').textContent = p.nombre;
+  document.getElementById('modalPrecio').textContent = p.precio;
+  document.getElementById('modalDesc').textContent = p.desc;
+
+  // Imágenes
+  const imgsContainer = document.getElementById('modalImgs');
+  imgsContainer.querySelectorAll('.modal-img').forEach(el => el.remove());
+  modalImgs = p.imgs;
+  modalImgCurrent = 0;
+
+  p.imgs.forEach((src, i) => {
+    const img = document.createElement('img');
+    img.className = 'modal-img' + (i === 0 ? ' active' : '');
+    img.src = src;
+    img.style.cursor = p.imgs.length > 1 ? 'pointer' : 'default';
+    if (p.imgs.length > 1) {
+      img.onclick = () => {
+        const next = (modalImgCurrent + 1) % p.imgs.length;
+        switchModalImg(next);
+      };
+    }
+    imgsContainer.appendChild(img);
+  });
+
+  // Dots
+  const dots = document.getElementById('modalDots');
+  dots.innerHTML = '';
+  if (p.imgs.length > 1) {
+    p.imgs.forEach((_, i) => {
+      const dot = document.createElement('button');
+      dot.className = 'modal-dot' + (i === 0 ? ' active' : '');
+      dot.onclick = () => switchModalImg(i);
+      dots.appendChild(dot);
+    });
+  }
+
+  // Tallas
+  const tallasEl = document.getElementById('modalTallas');
+  tallasEl.innerHTML = '';
+  p.tallas.forEach(t => {
+    const btn = document.createElement('button');
+    btn.className = 'modal-talla';
+    btn.textContent = t;
+    btn.onclick = () => {
+      tallasEl.querySelectorAll('.modal-talla').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+    };
+    tallasEl.appendChild(btn);
+  });
+
+  document.getElementById('modal').style.background = 'var(--ocean-sand)';
+  document.getElementById('modalNombre').style.color = 'var(--ocean-text)';
+  document.getElementById('modalPrecio').style.color = 'var(--ocean-deep)';
+  document.getElementById('modalDesc').style.color = 'var(--ocean-text)';
+  document.getElementById('modalTag').style.color = 'var(--ocean-deep)';
+  document.getElementById('modalImgs').style.background = 'var(--ocean-beige)';
+  document.getElementById('modalOverlay').classList.add('visible');
+  
+}
+
+function switchModalImg(index) {
+  const imgs = document.querySelectorAll('.modal-img');
+  const dots = document.querySelectorAll('.modal-dot');
+  imgs[modalImgCurrent].classList.remove('active');
+  if (dots[modalImgCurrent]) dots[modalImgCurrent].classList.remove('active');
+  modalImgCurrent = index;
+  imgs[modalImgCurrent].classList.add('active');
+  if (dots[modalImgCurrent]) dots[modalImgCurrent].classList.add('active');
+}
+
+function closeModal(e) {
+  if (e && e.target !== document.getElementById('modalOverlay')) return;
+  document.getElementById('modalOverlay').classList.remove('visible');
+}
+// BASICS COLLECTION
+const productosBasics = [
+  {
+    nombre: 'Basic MØNE Shirt 1',
+    precio: '$XXX',
+    desc: 'Camisa esencial de corte limpio. Confeccionada en algodón premium con acabados minimalistas.',
+    tallas: ['XS','S','M','L','XL'],
+    imgs: ['imgs/Basic MONE Shirt 1 BMS1.png', 'imgs/Basic MONE Shirt 1 BMS1 BACK.png']
+  },
+  {
+    nombre: 'Basic MØNE Shirt 2',
+    precio: '$XXX',
+    desc: 'Silueta relajada con detalles precisos. La pieza definitiva para el guardarropa moderno.',
+    tallas: ['XS','S','M','L','XL'],
+    imgs: ['imgs/Basic MONE Shirt 2 BMS2.png', 'imgs/Basic MONE Shirt 2 BMS2 BACK.png']
+  },
+  {
+    nombre: 'Basic MØNE Shirt 3',
+    precio: '$XXX',
+    desc: 'Tejido suave de alta durabilidad. Diseñada para usarse sola o como parte de un look completo.',
+    tallas: ['XS','S','M','L','XL'],
+    imgs: ['imgs/Basic MONE Shirt 3 BMS3.png', 'imgs/Basic MONE Shirt 3 BMS3 BACK.png']
+  },
+  {
+    nombre: 'Basic MØNE Shirt 4',
+    precio: '$XXX',
+    desc: 'Corte estructurado con caída perfecta. La adición más reciente a la línea Basics de MØNE.',
+    tallas: ['XS','S','M','L','XL'],
+    imgs: ['imgs/Basic MONE Shirt 4 BMS4.png']
+  }
+];
+
+let basicsModalImgCurrent = 0;
+
+function openBasicsModal(index) {
+  const p = productosBasics[index];
+  document.getElementById('modalNombre').textContent = p.nombre;
+  document.getElementById('modalPrecio').textContent = p.precio;
+  document.getElementById('modalDesc').textContent = p.desc;
+  document.getElementById('modalTag').textContent = 'Basics Collection';
+
+  const imgsContainer = document.getElementById('modalImgs');
+  imgsContainer.querySelectorAll('.modal-img').forEach(el => el.remove());
+  basicsModalImgCurrent = 0;
+
+  p.imgs.forEach((src, i) => {
+    const img = document.createElement('img');
+    img.className = 'modal-img' + (i === 0 ? ' active' : '');
+    img.src = src;
+    img.style.cursor = p.imgs.length > 1 ? 'pointer' : 'default';
+    if (p.imgs.length > 1) {
+      img.onclick = () => {
+        const next = (basicsModalImgCurrent + 1) % p.imgs.length;
+        basicsModalImgCurrent = next;
+        document.querySelectorAll('.modal-img').forEach((el, i) => {
+          el.classList.toggle('active', i === next);
+        });
+        document.querySelectorAll('.modal-dot').forEach((el, i) => {
+          el.classList.toggle('active', i === next);
+        });
+      };
+    }
+    imgsContainer.appendChild(img);
+  });
+
+  const dots = document.getElementById('modalDots');
+  dots.innerHTML = '';
+  if (p.imgs.length > 1) {
+    p.imgs.forEach((_, i) => {
+      const dot = document.createElement('button');
+      dot.className = 'modal-dot' + (i === 0 ? ' active' : '');
+      dot.onclick = () => {
+        basicsModalImgCurrent = i;
+        document.querySelectorAll('.modal-img').forEach((el, j) => el.classList.toggle('active', j === i));
+        document.querySelectorAll('.modal-dot').forEach((el, j) => el.classList.toggle('active', j === i));
+      };
+      dots.appendChild(dot);
+    });
+  }
+
+  const tallasEl = document.getElementById('modalTallas');
+  tallasEl.innerHTML = '';
+  p.tallas.forEach(t => {
+    const btn = document.createElement('button');
+    btn.className = 'modal-talla';
+    btn.textContent = t;
+    btn.onclick = () => {
+      tallasEl.querySelectorAll('.modal-talla').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+    };
+    tallasEl.appendChild(btn);
+  });
+
+  document.getElementById('modal').style.background = 'var(--basics-white)';
+  document.getElementById('modalNombre').style.color = 'var(--basics-carbon)';
+  document.getElementById('modalPrecio').style.color = 'var(--basics-mid)';
+  document.getElementById('modalDesc').style.color = 'var(--basics-gray)';
+  document.getElementById('modalTag').style.color = 'var(--basics-mid)';
+  document.getElementById('modalImgs').style.background = 'var(--basics-light)';
+  document.getElementById('modalOverlay').classList.add('visible');
+  
+}
+
+function showBasics() {
+  document.getElementById('inicio').style.display = 'none';
+  document.querySelector('.section-cats').style.display = 'none';
+  document.querySelector('footer').style.display = 'none';
+  document.getElementById('sectionOcean').classList.remove('visible');
+  document.getElementById('oceanBack').classList.remove('visible');
+  document.getElementById('sectionBasics').classList.add('visible');
+  document.getElementById('basicsBack').classList.add('visible');
+  window.scrollTo(0, 0);
+}
+
+// SEARCH
+const searchInput = document.getElementById('searchInput');
+const allProducts = [
+  ...productos.map((p, i) => ({ ...p, coleccion: 'Ocean', index: i, tipo: 'ocean' })),
+  ...productosBasics.map((p, i) => ({ ...p, coleccion: 'Basics', index: i, tipo: 'basics' }))
+];
+
+const dropdown = document.createElement('div');
+dropdown.className = 'search-dropdown';
+document.querySelector('.nav-search').appendChild(dropdown);
+
+searchInput.addEventListener('input', () => {
+  const q = searchInput.value.trim().toLowerCase();
+  dropdown.innerHTML = '';
+
+  if (!q) {
+    dropdown.classList.remove('visible');
+    return;
+  }
+
+  const results = allProducts.filter(p => p.nombre.toLowerCase().includes(q));
+
+  if (results.length === 0) {
+    dropdown.innerHTML = '<p class="search-empty">Sin resultados</p>';
+  } else {
+    results.forEach(p => {
+      const item = document.createElement('div');
+      item.className = 'search-result';
+      item.innerHTML = `
+        <img class="search-result-img" src="${p.imgs[0]}" alt="${p.nombre}">
+        <div class="search-result-info">
+          <span class="search-result-nombre">${p.nombre}</span>
+          <span class="search-result-col">${p.coleccion} Collection</span>
+        </div>
+      `;
+      item.onclick = () => {
+        dropdown.classList.remove('visible');
+        searchInput.value = '';
+        if (p.tipo === 'ocean') {
+          showOcean();
+          setTimeout(() => openModal(p.index), 300);
+        } else {
+          showBasics();
+          setTimeout(() => openBasicsModal(p.index), 300);
+        }
+      };
+      dropdown.appendChild(item);
+    });
+  }
+
+  dropdown.classList.add('visible');
+});
+
+document.addEventListener('click', (e) => {
+  if (!document.querySelector('.nav-search').contains(e.target)) {
+    dropdown.classList.remove('visible');
+  }
+});
+
+// MOBILE SEARCH
+function toggleMobileSearch() {
+  const search = document.querySelector('.nav-search');
+  search.classList.toggle('mobile-visible');
+  if (search.classList.contains('mobile-visible')) {
+    document.getElementById('searchInput').focus();
+  }
+}
+
+// Mostrar icono búsqueda solo en móvil
+function checkMobile() {
+  const searchBtn = document.getElementById('searchBtn');
+  if (window.innerWidth <= 768) {
+    searchBtn.style.display = 'flex';
+  } else {
+    searchBtn.style.display = 'none';
+    document.querySelector('.nav-search').classList.remove('mobile-visible');
+  }
+}
+checkMobile();
+window.addEventListener('resize', checkMobile);
+  </script>
+
+<!-- FOOTER -->
+<footer>
+  <a href="#" class="footer-logo">MØNE</a>
+  <div class="footer-links">
+    <a href="#" class="footer-link">Instagram</a>
+    <a href="#" class="footer-link">Facebook</a>
+    <a href="#" class="footer-link">Contacto</a>
+  </div>
+  <div class="footer-divider"></div>
+  <p class="footer-copy">© 2026 MØNE. Todos los derechos reservados.</p>
+</footer>
+
+<!-- MODAL PRODUCTO -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
+  <div class="modal" id="modal">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+
+    <div class="modal-imgs" id="modalImgs">
+      <div class="modal-img-dots" id="modalDots"></div>
+    </div>
+
+    <div class="modal-info">
+      <span class="modal-tag" id="modalTag">Ocean Collection</span>
+      <h2 class="modal-nombre" id="modalNombre"></h2>
+      <p class="modal-precio" id="modalPrecio"></p>
+      <div class="modal-divider"></div>
+      <p class="modal-desc" id="modalDesc"></p>
+      <div class="modal-divider"></div>
+      <div>
+        <span class="modal-tallas-label">Talla</span>
+        <div class="modal-tallas" id="modalTallas"></div>
+      </div>
+      <button class="modal-add-btn" onclick="agregarBolsa()">Agregar a la bolsa</button>
+    </div>
+  </div>
+</div>
+
+<!-- BOLSA OVERLAY -->
+<div class="bolsa-overlay" id="bolsaOverlay" onclick="closeBolsa()"></div>
+
+<!-- BOLSA DRAWER -->
+<div class="bolsa-drawer" id="bolsaDrawer">
+  <div class="bolsa-header">
+    <div>
+      <p class="bolsa-title">Tu Bolsa</p>
+      <p class="bolsa-count" id="bolsaCount">0 productos</p>
+    </div>
+    <button class="bolsa-close" onclick="closeBolsa()">✕</button>
+  </div>
+  <div class="bolsa-items" id="bolsaItems"></div>
+  <div class="bolsa-footer">
+    <div class="bolsa-total">
+      <span class="bolsa-total-label">Total</span>
+      <span class="bolsa-total-precio" id="bolsaTotal">$0</span>
+    </div>
+    <button class="bolsa-checkout" id="bolsaCheckout" disabled onclick="finalizarCompra()">
+      Finalizar Compra
+    </button>
+  </div>
+</div>
+
+</body>
+</html>
